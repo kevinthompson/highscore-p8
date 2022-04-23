@@ -1,30 +1,19 @@
 _hs_name="aaa"
 _hs_name_index=1
-_hs_name_table={1,1,1}
+_hs_name_table={0,0,0}
 
 function _hs_input_update()
-  if (btnp(0)) _hs_name_index=mid(1,_hs_name_index-1,3)
-  if (btnp(1)) _hs_name_index=mid(1,_hs_name_index+1,3)
+  _hs_name_index=mid(1,3,
+    _hs_name_index+tonum(btnp(1))-tonum(btnp(0))
+  )
 
-  if btnp(2) then
-    if _hs_name_table[_hs_name_index]==1 then
-      _hs_name_table[_hs_name_index]=#_hs_chars
-    else
-      _hs_name_table[_hs_name_index]-=1
-    end
-  end
-
-  if btnp(3) then
-    if _hs_name_table[_hs_name_index]==#_hs_chars then
-      _hs_name_table[_hs_name_index]=1
-    else
-      _hs_name_table[_hs_name_index]+=1
-    end
-  end
+  _hs_name_table[_hs_name_index]=(
+    _hs_name_table[_hs_name_index]+tonum(btnp(3))-tonum(btnp(2))
+  )%#_hs_chars
 
   _hs_name=""
   for i in all(_hs_name_table) do
-    _hs_name=_hs_name..sub(_hs_chars,i,i)
+    _hs_name..=sub(_hs_chars,i+1,i+1)
   end
 
   highscore.input.name=_hs_name
