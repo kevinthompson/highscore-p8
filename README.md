@@ -7,6 +7,11 @@ A simple library for storing, loading, and inputting high score records in your 
 
 ----------
 
+## Additional Contributors
+- [pancelor](https://github.com/pancelor) – [Token Optimizations](https://github.com/kevinthompson/pico-8-highscore/pull/1)
+
+----------
+
 ## Installation
 
 Clone this repo or download the files, then move them into the directory of the project you would like to include them in. Once you have them in your project, use `#include` statements to include the files you want. `highscore.lua` is always required.
