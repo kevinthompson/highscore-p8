@@ -18,15 +18,15 @@ function _hs_char_index(char)
 end
 
 function _hs_save()
-  for i=0,#_hs_records-1 do
-    if _hs_records[i+1] then
-      local addr=_hs_memory_addr+_hs_bytesize*i
-      for n=1,3 do
-        poke(addr+n-1,_hs_char_index(sub(_hs_records[i+1].name,n,n)))
-      end
-      poke2(addr+3,_hs_records[i+1].score)
-    end
-  end
+ for i,record in ipairs(_hs_records) do
+   if record then
+     local addr=_hs_memory_addr+_hs_bytesize*(i-1)
+     for n=1,3 do
+       poke(addr+n-1,_hs_char_index(sub(record.name,n,n)))
+     end
+     poke2(addr+3,record.score)
+   end
+ end
 
   _hs_update_table()
 end
@@ -44,17 +44,17 @@ function _hs_load()
     local addr=_hs_memory_addr+_hs_bytesize*i
     for n=0,2 do
       local v=peek(addr+n) or 1
-      name=name..sub(_hs_chars,v,v)
+      name..=sub(_hs_chars,v,v)
     end
-    _hs_records[i+1]={name=name,score=peek2(addr+3)}
+    add(_hs_records,{name=name,score=peek2(addr+3)})
   end
 
   _hs_update_table()
 end
 
 function _hs_index(score)
-  for i=1,#_hs_records do
-    if score>tonum(_hs_records[i].score) then
+  for i,record in ipairs(_hs_records) do
+    if score>tonum(record.score) then
       return i
     end
   end
@@ -75,11 +75,8 @@ function _hs_add(name, score)
   if index then
     _hs_last_index=index
 
-    for i=_hs_max_records,index+1,-1 do
-      _hs_records[i]=_hs_records[i-1]
-    end
-
-    _hs_records[index]={name=name,score=score}
+    add(_hs_records,{name=name,score=score},index)
+    _hs_records[_hs_max_records+1]=nil
     _hs_save()
   end
 end
