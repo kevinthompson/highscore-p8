@@ -76,7 +76,7 @@ function _hs_add(name, score)
     _hs_last_index=index
 
     add(_hs_records,{name=name,score=score},index)
-    _hs_records[_hs_max_records]=nil
+    _hs_records[_hs_max_records+1]=nil
     _hs_save()
   end
 end
