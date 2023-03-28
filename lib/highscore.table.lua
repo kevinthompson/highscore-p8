@@ -19,7 +19,7 @@ function _hs_table_draw(x,y)
 		local text=record.name..padded_score
 		if (x) print(text,x,y) else _hs_printc(text,y)
 
-		if _hs_last_index>0 and _hs_last_index==i then
+		if _hs_new_score_index>0 and _hs_new_score_index==i then
 			local x=x or 64-((#text/2)*4)
 			? "★",x-10,y,7
 		end

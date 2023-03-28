@@ -5,7 +5,7 @@ _hs_chars="abcdefghijklmnopqrstuvwxyz "
 _hs_max_records=10
 _hs_bytesize=5
 _hs_records={}
-_hs_last_index=0
+_hs_new_score_index=0
 
 function _hs_char_index(char)
   for i=1,#_hs_chars do
@@ -73,7 +73,7 @@ function _hs_add(name, score)
   local index=_hs_index(score)
 
   if index then
-    _hs_last_index=index
+    _hs_new_score_index=index
 
     add(_hs_records,{name=name,score=score},index)
     _hs_records[_hs_max_records+1]=nil
@@ -82,7 +82,7 @@ function _hs_add(name, score)
 end
 
 function _hs_update_table()
-  highscore.last_index=_hs_last_index
+  highscore.new_score_index=_hs_new_score_index
   highscore.records=_hs_records
 end
 

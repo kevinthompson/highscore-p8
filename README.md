@@ -104,13 +104,13 @@ for record in all(highscore.records) do
 end
 ```
 
-#### highscore.last_index
+#### highscore.new_score_index
 Return the last updated record index from the highscore table. This is useful for showing new high scores on an end screen, for example.
 
 ```lua
 highscore.records -- {}
 highscore.add("kev",1000)
-highscore.last_index -- 1
+highscore.new_score_index -- 1
 ```
 
 ----------
